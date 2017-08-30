@@ -1,4 +1,4 @@
-=== Google Calendar List View ===
+=== List View for Posts ===
 Contributors: kimipooh
 Donate link: 
 Tags: List View
@@ -16,7 +16,7 @@ The plugin is the shortcode for comprehensively displaying the list view for pag
 
 = Document =
 
-Please see the [documentation]( https://info.cseas.kyoto-u.ac.jp/en/links-en/plugin-en/wordpress-dev-info-en/list-view-posts) in detail. [Japanese documentation]( https://info.cseas.kyoto-u.ac.jp/links-ja/plugin-ja/wordpress-dev-info/list-view-posts)
+Please see the [documentation]( https://info.cseas.kyoto-u.ac.jp/en/links-en/plugin-en/wordpress-dev-info-en/list-view-posts) in detail. If you want to read the document in Japanese, please see [Japanese documentation]( https://info.cseas.kyoto-u.ac.jp/links-ja/plugin-ja/wordpress-dev-info/list-view-posts).
 
 == Installation ==
 
