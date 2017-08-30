@@ -6,7 +6,7 @@ Description: The plugin is the shortcode for comprehensively displaying the list
 Version: 1.0
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
-Text Domain: list-view-posts
+Text Domain: list-view-for-posts
 Domain Path: /lang
 */
 
