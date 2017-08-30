@@ -2,7 +2,7 @@
 Contributors: kimipooh
 Donate link: 
 Tags: List View
-Requires at least: 4.0
+Requires at least: 4.1
 Tested up to: 4.8.1
 Stable tag: 1.0
 License: GPL v2  or later
