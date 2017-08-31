@@ -6,7 +6,7 @@ $output_category_temp_post_type = '';
 $output_category_temp_category = '';
 
 if(!empty($enable_view_post_type)):
-	if( ! $this->default_post_types[get_post_type_object(get_post_type())->name] ?: "" ):
+	if( ! isset($this->default_post_types[get_post_type_object(get_post_type())->name]) ? $this->default_post_types[get_post_type_object(get_post_type())->name] : "" ):
 		$custom_category_label = esc_html( get_post_type_object(get_post_type())->label );
 		$output_category_temp_post_type = "<p class='${html_tag_class}_post_type'><span>$custom_category_label</span></p>";
 	endif;
@@ -16,8 +16,8 @@ if(!empty($enable_view_category)):
 	foreach($category_taxonomy as $cat):
 		$terms = get_the_terms($post->ID, $cat);
 		if($terms && !is_wp_error($terms)):
-			$term  = esc_html( $terms[0]->name ?: "" ); // Only get first value in the terms.
-			$term_slug = esc_attr($terms[0]->slug ?: "");
+			$term  = esc_html( isset($terms[0]->name) ? $terms[0]->name : "" ); // Only get first value in the terms.
+			$term_slug = esc_attr( isset($terms[0]->slug) ? $terms[0]->name : "" );
 			if (strtolower($term) === 'uncategorized'): // 'uncategorized' is ignored.
 				 continue;
 			endif;

@@ -3,7 +3,7 @@
 Plugin Name: List View for Posts
 Plugin URI: 
 Description: The plugin is the shortcode for comprehensively displaying the list view for pages and posts (including customizing posts) supported with the plugins; WPML and The Events Calendar.
-Version: 1.0
+Version: 1.1
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: list-view-for-posts
@@ -36,6 +36,7 @@ class lvp extends lvp_library{
 	}
 
 	public function shortcodes($atts){
+		// Delete an illegal code for the shortcode options.
 		$atts = $this->security_check_array($atts);
 		extract($atts = shortcode_atts(array(
 			'post_type'		=> 'post',
@@ -56,11 +57,19 @@ class lvp extends lvp_library{
 			'id'			=> '',		// If you want to change various original templates instead of "html_tag", judge the key.
 		), $atts));
 		
+		// Fixed the illegal value of the shortcode option.
+		if($max_items <= 0):
+			$max_items = 5;
+			$atts['max_items'] = $max_items;
+		endif;
+		if($page <= 0):
+			$page = 1;
+			$atts['page'] = $page;
+		endif;
 		$html_tag_class = $html_tag_class ?: $this->plugin_shortcode;
-		$html_tag = $this->html_tags[$html_tag] ?: $default_html_tag;
+		$html_tag = isset($this->html_tags[$html_tag]) ? $this->html_tags[$html_tag] : $default_html_tag;
 		$atts['html_tag_class'] = $html_tag_class;
 		$atts['html_tag'] = $html_tag;
-		$start_item = ($page-1)*5;
 		$post_type = explode(',', $post_type);
 		$post_status = explode(',', $post_status);
 		$category_taxonomy = explode(',', $category_taxonomy);
@@ -69,18 +78,19 @@ class lvp extends lvp_library{
 			$orderbysort = 'DESC';
 			$atts['orderbysort'] = $orderbysort;
 		endif; 
-		if($max_items <= 0):
-			$max_items = 5;
-			$atts['max_items'] = $max_items;
-		endif;
+		$start_item = ($page-1)*5;
+
+		// Processing for Posts
 		global $wpdb;
 		global $post;
+
 		// Reference: WPML support
 		// http://wpml.org/forums/topic/recent-posts-custom-widget-wpdb-get_results/
 		$wp_prefix = $wpdb->prefix;
 		$wp_icl_translations = "${wp_prefix}icl_translations";
 		$lang_code = $wpml_lang ?: ICL_LANGUAGE_CODE;
 
+		// Creating SQL for Database.
 		$sql  = sprintf("SELECT * FROM %s ", esc_sql($wpdb->posts));
 		if($this->is_active("sitepress-multilingual-cms/sitepress.php")):
 			$sql .= sprintf("LEFT JOIN %s ON %sposts.ID = %s.element_id", esc_sql($wp_icl_translations), esc_sql($wp_prefix), esc_sql($wp_icl_translations));
@@ -128,7 +138,7 @@ class lvp extends lvp_library{
 				$output_category_temp_post_type = '';
 				$output_category_temp_category = '';
 				if(!empty($enable_view_post_type)):
-					if( ! $this->default_post_types[get_post_type_object(get_post_type())->name] ?: "" ):
+					if( ! isset($this->default_post_types[get_post_type_object(get_post_type())->name]) ? $this->default_post_types[get_post_type_object(get_post_type())->name] : "" ):
 						$custom_category_label = esc_html( get_post_type_object(get_post_type())->label );
 						$output_category_temp_post_type = "<span class='${html_tag_class}_post_type'>$custom_category_label</span>";
 					endif;
@@ -138,8 +148,8 @@ class lvp extends lvp_library{
 					foreach($category_taxonomy as $cat):
 						$terms = get_the_terms($post->ID, $cat);
 						if($terms && !is_wp_error($terms)):
-							$term  = esc_html( $terms[0]->name ?: "" ); // Only get first value in the terms.
-							$term_slug = esc_attr($terms[0]->slug ?: "");
+							$term  = esc_html( isset($terms[0]->name) ? $terms[0]->name : "" ); // Only get first value in the terms.
+							$term_slug = esc_attr( isset($terms[0]->slug) ? $terms[0]->slug : "" );
 							if (strtolower($term) === 'uncategorized' || strtolower($term) === 'unclassified'): // 'uncategorized' and 'unclassified' are ignored.
 								 continue;
 							endif;
