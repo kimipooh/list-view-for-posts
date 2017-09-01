@@ -3,7 +3,7 @@
 Plugin Name: List View for Posts
 Plugin URI: 
 Description: The plugin is the shortcode for comprehensively displaying the list view for pages and posts (including customizing posts) supported with the plugins; WPML and The Events Calendar.
-Version: 1.1
+Version: 1.2
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: list-view-for-posts
@@ -31,7 +31,7 @@ class lvp extends lvp_library{
 		load_plugin_textdomain($this->plugin_name, false, dirname( plugin_basename( __FILE__ ) ) . '/' . $this->lang_dir . '/');
 	}
 	public function init_settings(){
-		$this->settings['version'] = 100;
+		$this->settings['version'] = 120;
 		$this->settings['db_version'] = 100;
 	}
 
@@ -133,39 +133,13 @@ class lvp extends lvp_library{
 			$out = '';
 			foreach( $loop as $post ): setup_postdata($post);
 				if($max_post-- <= 0 ) break;
-				// If the post belongs to a custom post, get the custom post label.
-				$output_category_temp = '';
-				$output_category_temp_post_type = '';
-				$output_category_temp_category = '';
-				if(!empty($enable_view_post_type)):
-					if( ! isset($this->default_post_types[get_post_type_object(get_post_type())->name]) ? $this->default_post_types[get_post_type_object(get_post_type())->name] : "" ):
-						$custom_category_label = esc_html( get_post_type_object(get_post_type())->label );
-						$output_category_temp_post_type = "<span class='${html_tag_class}_post_type'>$custom_category_label</span>";
-					endif;
-				endif;
-				
-				if(!empty($enable_view_category)):
-					foreach($category_taxonomy as $cat):
-						$terms = get_the_terms($post->ID, $cat);
-						if($terms && !is_wp_error($terms)):
-							$term  = esc_html( isset($terms[0]->name) ? $terms[0]->name : "" ); // Only get first value in the terms.
-							$term_slug = esc_attr( isset($terms[0]->slug) ? $terms[0]->slug : "" );
-							if (strtolower($term) === 'uncategorized' || strtolower($term) === 'unclassified'): // 'uncategorized' and 'unclassified' are ignored.
-								 continue;
-							endif;
-							$term_link = get_term_link($terms[0]);
-							$output_category_temp_category .= "<span class='${html_tag_class}_category_${term_slug}'>";
-							if(!is_wp_error($term_link) && !is_wp_error($term)):
-								$output_category_temp_category .= "<a class='${html_tag_class}_category_link_${term_slug}' href='$term_link'>$term</a></span>";
-							else:
-								$output_category_temp_category .= "<span>$term</span>";
-							endif;								
-						endif;
-					endforeach;
-				endif;
 
-				$output_category_temp = $output_category_temp_post_type . $output_category_temp_category;
 				
+				// Getting category template code.
+				$out_atts = array_merge( array('default_post_types'=>$this->default_post_types), $atts );
+				unset($out_atts['hook_secret_key']);
+				$output_category_temp = $this->get_taxonomy_template($out_atts);
+
 				$out_temp = '';
 				$link = esc_url(get_permalink());
 				$title = esc_html( wp_strip_all_tags( get_the_title() ) );
@@ -176,6 +150,7 @@ class lvp extends lvp_library{
 				endif;
 				if(!empty($hook_secret_key)):
 					$out_atts = array_merge( array('title'=>$title, 'link'=>$link, 'date'=>$date, 'default_post_types'=>$this->default_post_types), $atts);
+					unset($out_atts['hook_secret_key']);
 					$out_t = wp_kses_post(apply_filters( 'lvp_each_item', $out_temp, $out_atts));
 					if(isset($out_t['hook_secret_key']) && $hook_secret_key === $out_t['hook_secret_key']):
 						$out .= $out_t['data'];
