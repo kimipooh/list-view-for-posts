@@ -39,7 +39,6 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 
 * Tested up WordPress 4.9.
 
-
 = 1.2 =
 
 * Fixed the security of "hook_secret_key" shortcode option.
