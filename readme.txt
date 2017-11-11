@@ -3,9 +3,9 @@ Contributors: kimipooh
 Donate link: 
 Tags: List View
 Requires at least: 4.1
-Tested up to: 4.8.1
+Tested up to: 4.9
 Requires PHP: 5.6
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPL v2  or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,11 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 2. A part of the source code of Sample List view
 
 == Changelog ==
+
+= 1.3 =
+
+* Tested up WordPress 4.9.
+
 
 = 1.2 =
 
