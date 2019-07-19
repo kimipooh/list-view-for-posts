@@ -39,9 +39,7 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 * Tested up WordPress 5.2.2 with PHP7.3
 
 = 1.3 =
-
 * Tested up WordPress 4.9.
-
 
 = 1.2 =
 
