@@ -3,7 +3,7 @@ Contributors: kimipooh
 Donate link: 
 Tags: List View
 Requires at least: 4.1
-Tested up to: 5.0
+Tested up to: 5.2.2
 Requires PHP: 5.6
 Stable tag: 1.4
 License: GPL v2  or later
@@ -13,7 +13,7 @@ The plugin is the shortcode for comprehensively displaying the list view for pag
  
 == Description ==
 
-The plugin is the shortcode for comprehensively displaying the list view for pages and posts .
+The plugin is the shortcode (list-view-posts) for comprehensively displaying the list view for pages and posts .
 
 = Document =
 
@@ -36,12 +36,12 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 == Changelog ==
 
 = 1.4 =
-
-* Tested up WordPress 5.0 and PHP 7.2. 
+* Tested up WordPress 5.2.2 with PHP7.3
 
 = 1.3 =
 
 * Tested up WordPress 4.9.
+
 
 = 1.2 =
 
