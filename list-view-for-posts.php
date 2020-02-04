@@ -3,7 +3,7 @@
 Plugin Name: List View for Posts
 Plugin URI: 
 Description: The plugin is the shortcode for comprehensively displaying the list view for pages and posts (including customizing posts) supported with the plugins; WPML and The Events Calendar.
-Version: 1.4
+Version: 1.5
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: list-view-for-posts
@@ -28,10 +28,11 @@ class lvp extends lvp_library{
 		add_shortcode($this->plugin_shortcode, array(&$this, 'shortcodes'));
 	}
 	public function enable_language_translation(){
-		load_plugin_textdomain($this->plugin_name, false, dirname( plugin_basename( __FILE__ ) ) . '/' . $this->lang_dir . '/');
+		load_plugin_textdomain($this->plugin_name)
+		or load_plugin_textdomain($this->plugin_name, false, dirname( plugin_basename( __FILE__ ) ) . '/' . $this->lang_dir . '/');
 	}
 	public function init_settings(){
-		$this->settings['version'] = 140;
+		$this->settings['version'] = 150;
 		$this->settings['db_version'] = 100;
 	}
 
@@ -88,7 +89,9 @@ class lvp extends lvp_library{
 		// http://wpml.org/forums/topic/recent-posts-custom-widget-wpdb-get_results/
 		$wp_prefix = $wpdb->prefix;
 		$wp_icl_translations = "${wp_prefix}icl_translations";
-		$lang_code = $wpml_lang ?: ICL_LANGUAGE_CODE;
+		if($this->is_active("sitepress-multilingual-cms/sitepress.php")):
+			$lang_code = $wpml_lang ?: ICL_LANGUAGE_CODE;
+		endif;
 
 		// Creating SQL for Database.
 		$sql  = sprintf("SELECT * FROM %s ", esc_sql($wpdb->posts));

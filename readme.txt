@@ -3,9 +3,9 @@ Contributors: kimipooh
 Donate link: 
 Tags: List View
 Requires at least: 4.1
-Tested up to: 5.2.2
+Tested up to: 5.3.2
 Requires PHP: 5.6
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPL v2  or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,10 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 2. A part of the source code of Sample List view
 
 == Changelog ==
+
+= 1.5 =
+* Tested up WordPress 5.3.2 with PHP7.4
+* Fixed the issue that the warning message is displayed when WPML plugin is disabled.
 
 = 1.4 =
 * Tested up WordPress 5.2.2 with PHP7.3
