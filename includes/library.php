@@ -37,6 +37,8 @@ class lvp_library{
 		$atts = $this->security_check_array($atts);
 		extract($atts);
 
+		global $post;
+
 		$out = '';
 		$output_category_temp_post_type = '';
 		$output_category_temp_category = '';

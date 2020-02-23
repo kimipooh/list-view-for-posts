@@ -3,7 +3,7 @@
 Plugin Name: List View for Posts
 Plugin URI: 
 Description: The plugin is the shortcode for comprehensively displaying the list view for pages and posts (including customizing posts) supported with the plugins; WPML and The Events Calendar.
-Version: 1.5
+Version: 1.6
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: list-view-for-posts
@@ -32,7 +32,7 @@ class lvp extends lvp_library{
 		or load_plugin_textdomain($this->plugin_name, false, dirname( plugin_basename( __FILE__ ) ) . '/' . $this->lang_dir . '/');
 	}
 	public function init_settings(){
-		$this->settings['version'] = 150;
+		$this->settings['version'] = 160;
 		$this->settings['db_version'] = 100;
 	}
 
