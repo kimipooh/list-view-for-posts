@@ -2,10 +2,10 @@
 Contributors: kimipooh
 Donate link: 
 Tags: List View
-Requires at least: 4.1
-Tested up to: 5.3.2
+Requires at least: 5.0
+Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.6
+Stable tag: 1.7
 License: GPL v2  or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,10 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 2. A part of the source code of Sample List view
 
 == Changelog ==
+
+= 1.7 =
+* WordPress 4.x support was ended.
+* Tested up WordPress 5.6 with PHP7.4
 
 = 1.6 =
 * Fixed the waring in get_taxonomy_template function.
