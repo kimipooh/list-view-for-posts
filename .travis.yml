@@ -30,7 +30,19 @@ matrix:
       env: WP_VERSION=latest
     - php: 5.6
       env: WP_VERSION=latest
-
+  allow_failures:
+    - php: nightly
+    - php: 7.4
+    - php: 7.3
+    
+install:
+    - if [[ $TRAVIS_PHP_VERSION > '7.2' ]]; then
+        wget -O ~/.phpenv/versions/$(phpenv version-name)/bin/phpunit https://phar.phpunit.de/phpunit-7.phar;
+      fi
+    - if [[ $TRAVIS_PHP_VERSION > '7.2' ]]; then
+        chmod 755 ~/.phpenv/versions/$(phpenv version-name)/bin/phpunit;
+      fi
+      
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
