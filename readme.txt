@@ -3,7 +3,7 @@ Contributors: kimipooh
 Donate link: 
 Tags: List View
 Requires at least: 5.0
-Tested up to: 5.8
+Tested up to: 6.0
 Requires PHP: 5.6
 Stable tag: 1.7
 License: GPL v2  or later
@@ -39,6 +39,7 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 * WordPress 4.x support was ended.
 * Tested up WordPress 5.6 with PHP7.4
 * Tested up WordPress 5.8
+* Tested up WordPress 6.0 with PHP8.0
 
 = 1.6 =
 * Fixed the waring in get_taxonomy_template function.
