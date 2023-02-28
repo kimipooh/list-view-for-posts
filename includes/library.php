@@ -47,7 +47,7 @@ class lvp_library{
 		if(!empty($enable_view_post_type)):
 			if( ! isset($default_post_types[get_post_type_object(get_post_type())->name]) ? $default_post_types[get_post_type_object(get_post_type())->name] : "" ):
 				$custom_category_label = esc_html( get_post_type_object(get_post_type())->label );
-				$output_category_temp_post_type = "<span class='${html_tag_class}_post_type'>$custom_category_label</span>";
+				$output_category_temp_post_type = "<span class='{$html_tag_class}_post_type'>$custom_category_label</span>";
 			endif;
 		endif;
 
@@ -62,9 +62,9 @@ class lvp_library{
 						 continue;
 					endif;
 					$term_link = get_term_link($terms[0]);
-					$output_category_temp_category .= "<span class='${html_tag_class}_category_${term_slug}'>";
+					$output_category_temp_category .= "<span class='{$html_tag_class}_category_{$term_slug}'>";
 					if(!is_wp_error($term_link) && !is_wp_error($term)):
-						$output_category_temp_category .= "<a class='${html_tag_class}_category_link_${term_slug}' href='$term_link'>$term</a></span>";
+						$output_category_temp_category .= "<a class='{$html_tag_class}_category_link_{$term_slug}' href='$term_link'>$term</a></span>";
 					else:
 						$output_category_temp_category .= "<span>$term</span>";
 					endif;

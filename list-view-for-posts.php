@@ -3,7 +3,7 @@
 Plugin Name: List View for Posts
 Plugin URI: 
 Description: The plugin is the shortcode for comprehensively displaying the list view for pages and posts (including customizing posts) supported with the plugins; WPML and The Events Calendar.
-Version: 1.7
+Version: 1.8
 Author: Kimiya Kitani
 Author URI: https://profiles.wordpress.org/kimipooh/
 Text Domain: list-view-for-posts
@@ -21,6 +21,7 @@ class lvp extends lvp_library{
 	var $lang_dir = 'lang';	// Language folder name
 	// https://wpdocs.osdn.jp/%E6%8A%95%E7%A8%BF%E3%82%BF%E3%82%A4%E3%83%97
 	var $default_post_types = array('post'=>'post', 'page'=>'page', 'attachment'=>'attachment', 'revision'=>'revision', 'nav_menu_item'=>'nav_menu_item');
+	var $settings = array();
 	
 	function __construct(){
 		$this->init_settings();
@@ -88,7 +89,7 @@ class lvp extends lvp_library{
 		// Reference: WPML support
 		// http://wpml.org/forums/topic/recent-posts-custom-widget-wpdb-get_results/
 		$wp_prefix = $wpdb->prefix;
-		$wp_icl_translations = "${wp_prefix}icl_translations";
+		$wp_icl_translations = "{$wp_prefix}icl_translations";
 		if($this->is_active("sitepress-multilingual-cms/sitepress.php")):
 			$lang_code = $wpml_lang ?: ICL_LANGUAGE_CODE;
 		endif;
