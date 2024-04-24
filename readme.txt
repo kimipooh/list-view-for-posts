@@ -3,7 +3,7 @@ Contributors: kimipooh
 Donate link: 
 Tags: List View
 Requires at least: 5.0
-Tested up to: 6.0
+Tested up to: 6.5.2
 Requires PHP: 5.6
 Stable tag: 1.8
 License: GPL v2  or later
@@ -37,6 +37,7 @@ Please describe a CSS code in the style.css or CSS files in your theme.
 
 = 1.8 =
 * Tested up WordPress 6.1 with PHP8.2
+* Tested up WordPress 6.5.2 with PHP8.3.6
 
 = 1.7 =
 * WordPress 4.x support was ended.
